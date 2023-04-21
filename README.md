@@ -9,14 +9,14 @@ First, run the ```receive_file.py``` code on receiver side.
 ```bash
 python receive_file.py -i {path to saved file}
                        -p {port that use for transfer data}
-                       -b {transfer baudrate}               
+                       -b {transfer boudrate}               
 ```
 
 On Sender side, you must run ```send_file.py``` code.
 ```bash
 python send_file.py -i {path to file}
                        -p {port that use for transfer data}
-                       -b {transfer baudrate}               
+                       -b {transfer boudrate}               
 ```
 
 #### Example:
