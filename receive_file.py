@@ -73,18 +73,25 @@ while True:
 
      if flag_receiving_end and (len(received_bytes) > 0):
 
-          if len(received_bytes) < 64:
+          if received_filename == "":
                received_filename = bytes(received_bytes).decode('ascii')
-               received_filename, len_file = received_filename.split("_")
+               received_filename, len_file = received_filename.split(",")
                print(received_filename, len_file)
+               
+               if int(len_file) > 0:
+                    pbar = tqdm(total=int(len_file))
+               else: 
+                   with open(os.path.join(folder_path, received_filename), "wb") as f: #write empty files
+                        f.write(b"") 
+                   received_filename = ""
 
-               pbar = tqdm(total=int(len_file))
           else:
-               if received_filename != "":
-                    with open(os.path.join(folder_path, received_filename), "wb") as f:
-                         f.write(bytes(received_bytes))
-                         print(f"{received_filename} is writed!!!")
-                         break
+               with open(os.path.join(folder_path, received_filename), "wb") as f : #write non-empty files
+                    f.write(bytes(received_bytes))
+
+               print(f"{received_filename} is writed!!!")
+               received_filename = ""
+               #break
 
           received_bytes = []
 
